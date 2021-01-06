@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 3000;
 // Create express
 const app = express();
 
+require("./routes/html-routes")(app);
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// require("/routes/html-routes")(app);
-// require("/routes/api-routes")(app);
 
 
 app.listen(PORT, function() {

@@ -8,6 +8,7 @@ module.exports = function (app) {
 
     // Setup the notes variable
     fs.readFile("db/db.json", "utf8", (err, data) => {
+       
         if (err) throw err;
 
         var notes = JSON.parse(data);
@@ -25,33 +26,34 @@ module.exports = function (app) {
         });
 
         // Retrieves a note with specific id
-        app.get("/api/notes/:id", function(req,res) {
-            // display json for the notes array indices of the provided id
+        app.get("/api/notes/:id", function (req, res) {
             res.json(notes[req.params.id]);
         });
 
         // Deletes a note with specific id
-        app.delete("/api/notes/:id", function(req, res) {
+        app.delete("/api/notes/:id", function (req, res) {
             notes.splice(req.params.id, 1);
-            updateDb();
-            console.log("Deleted note with id "+req.params.id);
+            updateData();
         });
-
 
         // Basic route that sends the user to the notes page
         app.get("/notes", function (req, res) {
-            res.sendFile(path.join(__dirname, "../public/notes.html"));
+            res.sendFile(path.join(__dirname, "./public/notes.html"));
         });
 
         // Basic route that sends the user first to the index Page
         app.get("*", function (req, res) {
-            res.sendFile(path.join(__dirname, "../public/index.html"));
+            res.sendFile(path.join(__dirname, "./public/index.html"));
         });
 
-    }
-
-
-
+        function updateData() {
+            fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+                if (err) throw err;
+                return true;
+            });
+        }
+    });
+}
 
 
 
