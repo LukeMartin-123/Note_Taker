@@ -3,17 +3,6 @@ const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
 const $newNoteBtn = $(".new-note");
 const $noteList = $(".list-container .list-group");
-const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 3000;
-const path = require("path");
-const fs = require("fs");
-
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-require("./routes/routes")(app);
 
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
@@ -161,6 +150,4 @@ $noteText.on("keyup", handleRenderSaveBtn);
 // Gets and renders the initial list of notes
 getAndRenderNotes();
 
-app.listen(PORT, function() {
-  console.log("App listening on PORT " + PORT);
-});
+
