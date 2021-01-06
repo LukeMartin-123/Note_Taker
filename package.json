@@ -10,6 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
-  }
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukeMartin-123/Note_Taker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LukeMartin-123/Note_Taker/issues"
+  },
+  "homepage": "https://github.com/LukeMartin-123/Note_Taker#readme"
 }
