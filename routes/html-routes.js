@@ -4,23 +4,53 @@ const path = require('path');
 const app = express();
 
 
-module.exports = function(app) {
+module.exports = function (app) {
 
-// Basic route that sends the user to the notes page
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-});
+    // Setup the notes variable
+    fs.readFile("db/db.json", "utf8", (err, data) => {
+        if (err) throw err;
 
-// Basic route that sends the user first to the index Page
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-});
+        var notes = JSON.parse(data);
 
-}
+        // Setup the api/notes get route
+        app.get("/api/notes", function (req, res) {
+            res.json(notes);
+        });
 
-app.get("/notes", function (req, res) {
-    res.json(newNote);
-});
+        // notes post route
+        app.post("api/notes", function (req, res) {
+            let newNote = req.body;
+            notes.push(newNote);
+            updateData();
+        });
+
+        // Retrieves a note with specific id
+        app.get("/api/notes/:id", function(req,res) {
+            // display json for the notes array indices of the provided id
+            res.json(notes[req.params.id]);
+        });
+
+        // Deletes a note with specific id
+        app.delete("/api/notes/:id", function(req, res) {
+            notes.splice(req.params.id, 1);
+            updateDb();
+            console.log("Deleted note with id "+req.params.id);
+        });
+
+
+        // Basic route that sends the user to the notes page
+        app.get("/notes", function (req, res) {
+            res.sendFile(path.join(__dirname, "../public/notes.html"));
+        });
+
+        // Basic route that sends the user first to the index Page
+        app.get("*", function (req, res) {
+            res.sendFile(path.join(__dirname, "../public/index.html"));
+        });
+
+    }
+
+
 
 
 
