@@ -19,19 +19,19 @@ module.exports = function (app) {
         });
 
         // notes post route
-        app.post("api/notes", function (req, res) {
-            let newNote = req.body;
+        app.post("/api/notes", function (req, res) {
+            var newNote = req.body;
             notes.push(newNote);
             updateData();
         });
 
-        // Retrieves a note with specific id
+        // Retrieves a note
         app.get("/api/notes/:id", function (req, res) {
             res.json(notes[req.params.id]);
         });
 
-        // Deletes a note with specific id
-        app.delete("/api/notes/:id", function (req, res) {
+        // Deletes a note
+        app.delete("/api/notes:id", function (req, res) {
             notes.splice(req.params.id, 1);
             updateData();
         });
@@ -47,7 +47,7 @@ module.exports = function (app) {
         });
 
         function updateData() {
-            fs.writeFile("db/db.json",JSON.stringify(notes,'\t'),err => {
+            fs.writeFile("db/db.json",JSON.stringify(notes) ,err => {
                 if (err) throw err;
                 return true;
             });

@@ -13,6 +13,7 @@ require("./routes/html-routes")(app);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public')); 
+app.use(express.static('__dirname')); 
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
