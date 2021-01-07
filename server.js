@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-//const fs = require("fs");
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,7 +15,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname,'/public')));
 
 //set routes
-//require("./routes/html-routes")(app);
 app.use(require("./routes/html-routes"));
 
 app.listen(PORT, function() {
