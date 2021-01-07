@@ -5,45 +5,6 @@ const path = require('path');
 const util = require("util");
 const { v4: uuidv4 } = require('uuid');
 
-// Setup the notes variable
-// fs.readFile("db/db.json", "utf8", (err, data) => {
-
-//     if (err) throw err;
-
-//     var notes = JSON.parse(data);
-
-//     // Setup the api/notes get route
-//     app.get("/api/notes", function (req, res) {
-//         res.json(notes);
-//     });
-
-//     // notes post route
-//     app.post("/api/notes", function (req, res) {
-//         var newNote = req.body;
-//         notes.push(newNote);
-//         updateData();
-//     });
-
-//     // Retrieves a note
-//     app.get("/api/notes/:id", function (req, res) {
-//         res.json(notes[req.params.id]);
-//     });
-
-//     // Deletes a note
-//     app.delete("/api/notes:id", function (req, res) {
-//         notes.splice(req.params.id, 1);
-//         updateData();
-//     });
-
-
-// function updateData() {
-//     fs.writeFile("db/db.json",JSON.stringify(notes) ,err => {
-//         if (err) throw err;
-//         return true;
-//     });
-// }
-//});
-
 const asyncRead = util.promisify(fs.readFile);
 
 const asyncWrite = util.promisify(fs.writeFile);
